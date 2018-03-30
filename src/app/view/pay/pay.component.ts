@@ -22,6 +22,8 @@ export class PayComponent implements OnInit {
 	// storageObj;
 	payment;
 	categoryList;
+	categoryArray;
+	
 	constructor(private router: Router) {
 		// this.router.events.subscribe(event=>{
 		// 	if(event instanceof NavigationEnd) {
@@ -43,7 +45,11 @@ export class PayComponent implements OnInit {
 		this.car = localStorage.getItem("car");
 		this.shop = localStorage.getItem("shop");
 		this.payment = localStorage.getItem("payment");
-		this.categoryList = localStorage.getItem("category");
+		// this.payment = this.payment.filter( function ( obj ) {
+		// 	return obj;
+		// });
+		this.categoryList = JSON.parse(localStorage.getItem("category"));
+		// console.log(typeof(this.categoryList));
 	}
 	addPayment() {
 		var allPayment = JSON.parse(localStorage.getItem('payment')) || [];
@@ -56,10 +62,8 @@ export class PayComponent implements OnInit {
 		localStorage.setItem('payment', JSON.stringify(allPayment));
 	}
 	categoryAdd() {
-		var allCategory = JSON.parse(localStorage.getItem('allCategoryArray')) || [];
-		let storageObj = {
-			'category-name': this.category.nativeElement.value
-		}
+		var allCategory = JSON.parse(localStorage.getItem('category')) || [];
+		let storageObj = this.category.nativeElement.value;
 		allCategory.push(storageObj);
 		localStorage.setItem('category', JSON.stringify(allCategory));
 	}

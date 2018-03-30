@@ -4,10 +4,14 @@
         // width: 100%;
         padding: 1rem;
         background-color: #f8f8f8;
-        .box-group {
-            // display: flex;
-            // justify-content: center;
-            // flex-direction: column;
+        form {
+            flex-direction: row;
+            .box-group {
+                margin: 1rem;
+                // display: flex;
+                // justify-content: center;
+                // flex-direction: column;
+            }
         }
     }
 } 

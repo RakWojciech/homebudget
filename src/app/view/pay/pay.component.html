@@ -20,19 +20,19 @@
                 <input type="date" name="date" id="date" #date>
             </div>
             <div class="box-group">
-                    <label for="payout">Tytul platnosci</label>
+                <label for="payout">Tytul platnosci</label>
                 <input type="text" name="payout" id="payout" #payout>
             </div>
             <div class="box-group">
-                    <label for="price">Kwota</label>
+                <label for="price">Kwota</label>
                 <input type="number" name="price" id="price" #price>
             </div>
-            <select name="" id="">
-                <option value="">Kategoria 1</option>
-                <option value="">Kategoria 2</option>
-                <option value="">Kategoria 3</option>
-                <option value="">Kategoria 4</option>
-            </select>
+            <div class="box-group">
+                <label for="price">Kategoria</label>
+                <select name="" id="" >
+                    <option value="" *ngFor="let category of categoryList">{{category}}</option>
+                </select>
+            </div>
             <input type="submit" value="Send">
         </form>
     </div>
