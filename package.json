@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "heroku-prebuild": "npm install",
-    "heroku-posbuild": "npm run build",
+    "heroku-postbuild": "npm run build",
     "preinstall": "",
     "postinstall": "",
     "ng": "ng",
@@ -50,7 +50,7 @@
     "tslint": "~5.9.1"
   },
   "engines": {
-    "node": "6.11.4",
-    "npm": "5.5.1"
+    "node": "8.10.0",
+    "npm": "5.7.1"
   }
 }
