@@ -13,6 +13,9 @@ export class PayComponent implements OnInit {
 	car;
 	shop;
 	msg;
+	freeMoney: number;
+	newPayment: number;
+	account;
 	//
 	@ViewChild('date') date: any;
 	@ViewChild('payout') payout: any;
@@ -23,6 +26,7 @@ export class PayComponent implements OnInit {
 	payment;
 	categoryList;
 	categoryArray;
+	objectKeys = Object.keys;
 	
 	constructor(private router: Router) {
 		// this.router.events.subscribe(event=>{
@@ -44,12 +48,22 @@ export class PayComponent implements OnInit {
 		this.rent = localStorage.getItem("rent");
 		this.car = localStorage.getItem("car");
 		this.shop = localStorage.getItem("shop");
-		this.payment = localStorage.getItem("payment");
-		// this.payment = this.payment.filter( function ( obj ) {
-		// 	return obj;
-		// });
+		this.payment = JSON.parse(localStorage.getItem("payment"));
+		this.account = JSON.parse(localStorage.getItem("account"));
+		
 		this.categoryList = JSON.parse(localStorage.getItem("category"));
-		// console.log(typeof(this.categoryList));
+		if(this.payment) this.newPayment = this.calcNewPayments(this.payment);
+
+
+		this.freeMoney  = (this.account ? this.account: 0) - (this.income ? this.income : 0) - (this.credit ? this.credit : 0) - (this.rent ? this.rent : 0) - (this.car ? this.car : 0) - (this.shop ? this.shop : 0) - (this.newPayment ? this.newPayment: 0);
+
+	}
+	calcNewPayments(payment) {
+		let newPayMent = 0;
+		payment.forEach(e=>{
+			newPayMent = +newPayMent + +e.price;
+		})
+		return newPayMent;
 	}
 	addPayment() {
 		var allPayment = JSON.parse(localStorage.getItem('payment')) || [];

@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 	@ViewChild('rent') rent: any;
 	@ViewChild('shop') shop: any;
 	@ViewChild('car') car: any;
+	@ViewChild('account') account: any;
 	constructor(private router: Router) { }
 
 	ngOnInit() {
@@ -26,6 +27,7 @@ export class HomeComponent implements OnInit {
 		localStorage.setItem("rent", this.rent.nativeElement.value);
 		localStorage.setItem("shop", this.shop.nativeElement.value);
 		localStorage.setItem("car", this.car.nativeElement.value);
+		localStorage.setItem("account", this.account.nativeElement.value);
 		this.router.navigateByUrl("pay");
 	}
 

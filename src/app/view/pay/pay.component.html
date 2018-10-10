@@ -4,11 +4,13 @@
         Podsumowanie:
     </h2>
     <div class="box-container">
-        <p>Przychód: {{income}}</p>
-        <p>Kredyt: {{credit}}</p>
-        <p>Czynsz: {{rent}}</p>
-        <p>Transport/Paliwo: {{car}}</p>
-        <p>Zakupy: {{shop}}</p>
+        <p>Przychód: {{income ? income : "--"}}</p>
+        <p>Stan konta: {{account ? account : "--"}}</p>
+        <p>Kredyt: {{credit ? credit : "--"}}</p>
+        <p>Czynsz: {{rent ? rent : "--"}}</p>
+        <p>Transport/Paliwo: {{car ? car : "--"}}</p>
+        <p>Zakupy: {{shop ? shop : "--"}}</p>
+        <p>Zostaje: {{freeMoney ? freeMoney : "--"}}</p>
     </div>
     <h2>
         Nowa płatność: 
@@ -39,7 +41,16 @@
     <h2>
         Płatności:
     </h2>
-    {{payment}}
+    <div class="box-container">
+        <!-- {{payment}} -->
+        <!-- 
+        <h3>{{payment[0].payout}}</h3> -->
+        <!-- <h6>{{</h6> -->
+        <div *ngFor="let payItem of payment; let i = index">
+            <h3>{{ payItem.payout | json }} ({{ payItem.price | json }})</h3>
+            <h6>{{ payItem.date | json }}</h6>
+        </div>
+    </div>
     
     <h2>
         Nowa kategoria: 
