@@ -1,0 +1,31 @@
+<div class="calendar">
+	<div class="calendar-view">
+		<div *ngIf="calendarOptions">
+			<ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+			 (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+		</div>
+	</div>
+	<div class="calendar-info">
+		<div class="add-event">
+			<h2>Add event</h2>
+			<form action="" (submit)="addEvent()" class="d-flex flex-column">
+				<div class="d-flex flex-row w-100">
+					<div class="box-group">
+						<label for="date">Data</label>
+						<input type="date" name="date" id="date" #date>
+					</div>
+					<div class="box-group">
+						<label for="payout">Event title</label>
+						<input type="text" name="title" id="title" #title>
+					</div>
+				</div>
+				<input type="submit" value="Send">
+			</form>
+		</div>
+		<div class="display-event" *ngIf="displayEvent">
+			<h2>Event: {{displayEvent.event.title}}</h2>
+			<p>Start: {{displayEvent.event.start}}</p>
+			<p *ngIf="displayEvent.event.end">End: {{displayEvent.event.end}}</p>
+		</div>
+	</div>
+</div>

@@ -1,68 +1,87 @@
-{{msg}}
 <div class="box">
-    <h2>
-        Podsumowanie:
-    </h2>
-    <div class="box-container">
-        <p>Przychód: {{income ? income : "--"}}</p>
-        <p>Stan konta: {{account ? account : "--"}}</p>
-        <p>Kredyt: {{credit ? credit : "--"}}</p>
-        <p>Czynsz: {{rent ? rent : "--"}}</p>
-        <p>Transport/Paliwo: {{car ? car : "--"}}</p>
-        <p>Zakupy: {{shop ? shop : "--"}}</p>
-        <p>Zostaje: {{freeMoney ? freeMoney : "--"}}</p>
-    </div>
-    <h2>
-        Nowa płatność: 
-    </h2>
-    <div class="box-container">
-        <form action="" (submit)="addPayment()">
-            <div class="box-group">
-                <label for="date">Data</label>
-                <input type="date" name="date" id="date" #date>
-            </div>
-            <div class="box-group">
-                <label for="payout">Tytul platnosci</label>
-                <input type="text" name="payout" id="payout" #payout>
-            </div>
-            <div class="box-group">
-                <label for="price">Kwota</label>
-                <input type="number" name="price" id="price" #price>
-            </div>
-            <div class="box-group">
-                <label for="price">Kategoria</label>
-                <select name="" id="" >
-                    <option value="" *ngFor="let category of categoryList">{{category}}</option>
-                </select>
-            </div>
-            <input type="submit" value="Send">
-        </form>
-    </div>
-    <h2>
-        Płatności:
-    </h2>
-    <div class="box-container">
-        <!-- {{payment}} -->
-        <!-- 
-        <h3>{{payment[0].payout}}</h3> -->
-        <!-- <h6>{{</h6> -->
-        <div *ngFor="let payItem of payment; let i = index">
-            <h3>{{ payItem.payout | json }} ({{ payItem.price | json }})</h3>
-            <h6>{{ payItem.date | json }}</h6>
-        </div>
-    </div>
-    
-    <h2>
-        Nowa kategoria: 
-    </h2>
-    <div class="box-container">
-        <form action="" (submit)="categoryAdd()">
-            <div class="box-group">
-                <label for="category">Nazwa kategorii</label>
-                <input type="text" name="category" id="category" #category>
-            </div>
-            <input type="submit" value="Send">
-        </form>
-    </div>
-    {{categoryList}}
+	<h2>
+		Podsumowanie:
+	</h2>
+	<div class="box-container">
+		<p>Przychód: {{income ? income : "--"}} zl</p>
+		<p>Stan konta: {{account ? account : "--"}} zl</p>
+		<p>Kredyt: {{credit ? credit : "--"}} zl</p>
+		<p>Czynsz: {{rent ? rent : "--"}} zl</p>
+		<p>Transport/Paliwo: {{car ? car : "--"}} zl</p>
+		<p>Zakupy: {{shop ? shop : "--"}} zl</p>
+		<p>Zostaje: {{freeMoney ? freeMoney : "--"}} zl</p>
+	</div>
+	<div class="adding-form">
+		<div class="col new-payment">
+			<h2>
+				Nowa płatność:
+			</h2>
+			<div class="box-container">
+				<form action="" (submit)="addPayment()" class="d-flex flex-column">
+					<div class="d-flex flex-row w-100">
+						<div class="box-group">
+							<label for="date">Data</label>
+							<input type="date" name="date" id="date" #date>
+						</div>
+						<div class="box-group">
+							<label for="payout">Tytul platnosci</label>
+							<input type="text" name="title" id="title" #title>
+						</div>
+						<div class="box-group">
+							<label for="price">Kwota</label>
+							<input type="number" name="price" id="price" #price>
+						</div>
+						<div class="box-group">
+							<label for="price">Kategoria</label>
+							<div class="dropdown">
+								<select name="" id="">
+									<option value="" *ngFor="let category of categoryList">{{category}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<input type="submit" value="Send">
+				</form>
+				<div *ngFor="let payItem of payment; let i = index">
+					<h3>Tytyl: {{ payItem.title }}</h3>
+					<h5>Kwota: {{ payItem.price }} zl</h5>
+					<h5>Data: {{ payItem.date }}</h5>
+					<hr>
+				</div>
+			</div>
+			<div class="box-container">
+				<!-- {{payment}} -->
+				<!-- 
+                <h3>{{payment[0].payout}}</h3> -->
+				<!-- <h6>{{</h6> -->
+
+			</div>
+		</div>
+
+		<div class="col categories">
+			<h2>
+				Nowa kategoria:
+			</h2>
+			<div class="box-container">
+				<form action="" (submit)="addCategory()">
+					<div class="box-group">
+						<label for="category">Nazwa kategorii</label>
+						<input type="text" name="category" id="category" #category>
+					</div>
+					<input type="submit" value="Send">
+				</form>
+				<div *ngFor="let category of categoryArray">
+					<h4>Title: {{category}}</h4>
+					<div class="operation">
+						<p><a href="">Usun</a></p>
+						<p><a href="">Edytuj</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<app-calendar></app-calendar>
+
+
 </div>
+<app-loading *ngIf="addState"></app-loading>
